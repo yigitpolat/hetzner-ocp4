@@ -1,6 +1,6 @@
 ---
 
-- name: Delete DNS record at CloudFlare
+- name: Delete DNS record at CloudFlare via account_api_token
   cloudflare_dns:
     state: absent
     zone: "{{ pd_cloudflare_zone }}"
@@ -15,7 +15,7 @@
     - api
     - '*.apps'
 
-- name: Delete IPv6 DNS record at CloudFlare
+- name: Delete IPv6 DNS record at CloudFlare via account_api_token
   cloudflare_dns:
     state: absent
     zone: "{{ pd_cloudflare_zone }}"
