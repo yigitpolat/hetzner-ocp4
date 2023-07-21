@@ -42,7 +42,7 @@ Download and extract the mirror-registry binary: (This is currently not done via
 ```bash
 mkdir ~/mirror
 cd ~/mirror
-wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz
+curl -L -O https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz
 tar -xzvf mirror-registry.tar.gz
 ```
 
@@ -52,6 +52,7 @@ Create the Mirror Registry
 ./mirror-registry install -v \
   --quayHostname host.compute.local:5000 \
   --quayRoot /var/lib/libvirt/images/mirror-registry/quay/ \
+  --quayStorage /var/lib/libvirt/images/mirror-registry/quay-storage/ \
   --ssh-key /root/.ssh/id_rsa \
   --sslKey /var/lib/libvirt/images/mirror-registry/certs/registry.key \
   --sslCert /var/lib/libvirt/images/mirror-registry/certs/registry.crt \
