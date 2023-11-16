@@ -212,43 +212,6 @@ oc patch OperatorHub cluster --type json \
   -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'
 ```
 
-### run index
-
-```
-podman run -p50051:50051 \
-  --authfile $LOCAL_SECRET_JSON \
-  registry.redhat.io/redhat/redhat-operator-index:v4.8
-```
-
-### Export names
-
-Install grpcurl <https://github.com/fullstorydev/grpcurl/releases>
-```
-grpcurl -plaintext localhost:50051 api.Registry/ListPackages > packages.out
-```
-
-### Sync Index
-
-```bash
-
-opm index prune \
-    -f registry.redhat.io/redhat/redhat-operator-index:v4.10 \
-    -p codeready-workspaces2 \
-    -t ${LOCAL_REGISTRY}/olm/redhat-operator-index:v4.10
-
-
-podman push ${LOCAL_REGISTRY}/olm/redhat-operator-index:v4.10
-
-```
-
-```
-oc adm catalog mirror \
-  ${LOCAL_REGISTRY}/olm/redhat-operator-index:v4.10 \
-  ${LOCAL_REGISTRY}/olm \
-  --manifests-only \
-  -a ${LOCAL_SECRET_JSON}
-```
-
 ## If `storage_nfs: true`
 
 1) Copy nfs-client-provisioner image
